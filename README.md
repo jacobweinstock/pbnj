@@ -1,7 +1,10 @@
 # PBNJ
 [![Build Status](https://cloud.drone.io/api/badges/tinkerbell/pbnj/status.svg)](https://cloud.drone.io/tinkerbell/pbnj)
+![](https://img.shields.io/badge/Stability-Maintained-green.svg)
 
 This service handles BMC interactions.
+
+This repository is [Maintained](https://github.com/packethost/standards/blob/master/maintained-statement.md) meaning that this software is supported by Packet and its community - available to use in production environments.
 
 ## Paths
 
