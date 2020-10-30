@@ -5,7 +5,9 @@ import (
 
 	v1 "github.com/tinkerbell/pbnj/api/v1"
 	"github.com/tinkerbell/pbnj/pkg/logging"
+	"github.com/tinkerbell/pbnj/pkg/repository"
 	"github.com/tinkerbell/pbnj/pkg/task"
+	"github.com/tinkerbell/pbnj/server/grpcsvr/bmc"
 )
 
 // UserService for crud operations on BMC users
@@ -17,11 +19,25 @@ type UserService struct {
 // CreateUser creates a user on a BMC
 func (u *UserService) CreateUser(ctx context.Context, in *v1.CreateUserRequest) (*v1.CreateUserResponse, error) {
 	l := u.Log.GetContextLogger(ctx)
-	l.V(0).Info("creating user")
+	l.V(0).Info("create user")
+
+	taskID, err := u.TaskRunner.Execute(
+		"create user",
+		func(s chan string) (string, repository.Error) {
+			mbd := bmc.CreateUser{
+				Accessory: bmc.Accessory{
+					Log:            l,
+					Ctx:            ctx,
+					StatusMessages: s,
+				},
+				CreateUserRequest: in,
+			}
+			return mbd.Create()
+		})
 
 	return &v1.CreateUserResponse{
-		TaskId: "user created",
-	}, nil
+		TaskId: taskID,
+	}, err
 }
 
 // DeleteUser deletes a user on a BMC
