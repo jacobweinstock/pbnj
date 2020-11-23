@@ -2,6 +2,7 @@ module github.com/tinkerbell/pbnj
 
 go 1.15
 
+replace github.com/tinkerbell/pbnj => github.com/jacobweinstock/pbnj v0.1.0
 require (
 	github.com/bmc-toolbox/bmclib v0.4.4
 	github.com/gebn/bmc v0.0.0-20200904230046-a5643220ab2a
