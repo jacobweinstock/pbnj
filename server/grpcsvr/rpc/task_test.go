@@ -6,15 +6,15 @@ import (
 	"time"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/cmd/zaplog"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
+	"github.com/jacobweinstock/pbnj/server/grpcsvr/persistence"
+	"github.com/jacobweinstock/pbnj/server/grpcsvr/taskrunner"
 	"github.com/onsi/gomega"
 	"github.com/packethost/pkg/log/logr"
 	"github.com/philippgille/gokv"
 	"github.com/philippgille/gokv/freecache"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/cmd/zaplog"
-	"github.com/tinkerbell/pbnj/pkg/repository"
-	"github.com/tinkerbell/pbnj/server/grpcsvr/persistence"
-	"github.com/tinkerbell/pbnj/server/grpcsvr/taskrunner"
 )
 
 func TestTaskFound(t *testing.T) {

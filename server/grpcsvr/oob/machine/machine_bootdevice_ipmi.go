@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/repository"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 	goipmi "github.com/vmware/goipmi"
 )
 

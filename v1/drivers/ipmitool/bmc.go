@@ -6,8 +6,8 @@ package ipmitool
 import (
 	"context"
 
+	"github.com/jacobweinstock/pbnj/interfaces/bmc"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/interfaces/bmc"
 )
 
 func init() {

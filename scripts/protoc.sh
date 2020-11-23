@@ -8,7 +8,7 @@
 #
 set -e
 
-REPO=github.com/tinkerbell/pbnj
+REPO=github.com/jacobweinstock/pbnj
 REPO_BASE=$(dirname ${REPO})
 PROTOS_LOC=api/v1
 OUT_LOC=api/v1

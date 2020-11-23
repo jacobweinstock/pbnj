@@ -9,14 +9,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jacobweinstock/pbnj/api/redfish"
+	"github.com/jacobweinstock/pbnj/evlog"
+	"github.com/jacobweinstock/pbnj/interfaces/bmc"
+	"github.com/jacobweinstock/pbnj/interfaces/boot"
+	"github.com/jacobweinstock/pbnj/interfaces/power"
+	"github.com/jacobweinstock/pbnj/log"
 	"github.com/packethost/pkg/env"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/api/redfish"
-	"github.com/tinkerbell/pbnj/evlog"
-	"github.com/tinkerbell/pbnj/interfaces/bmc"
-	"github.com/tinkerbell/pbnj/interfaces/boot"
-	"github.com/tinkerbell/pbnj/interfaces/power"
-	"github.com/tinkerbell/pbnj/log"
 	ginprometheus "github.com/zsais/go-gin-prometheus"
 )
 

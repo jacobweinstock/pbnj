@@ -9,8 +9,8 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jacobweinstock/pbnj/log"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/log"
 )
 
 // id is the type of value stored in the Contexts.

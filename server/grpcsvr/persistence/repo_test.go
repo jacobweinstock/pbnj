@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/go-test/deep"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 	"github.com/philippgille/gokv"
 	"github.com/philippgille/gokv/freecache"
-	"github.com/tinkerbell/pbnj/pkg/repository"
 )
 
 func TestAllMethods(t *testing.T) {

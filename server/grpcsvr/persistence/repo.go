@@ -6,8 +6,8 @@ import (
 
 	"github.com/pkg/errors"
 
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 	"github.com/philippgille/gokv"
-	"github.com/tinkerbell/pbnj/pkg/repository"
 )
 
 // GoKV store, methods implement repository.Actions interface

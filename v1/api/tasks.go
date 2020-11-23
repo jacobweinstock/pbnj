@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jacobweinstock/pbnj/interfaces/power"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/interfaces/power"
 )
 
 func taskStatus(c *gin.Context) {

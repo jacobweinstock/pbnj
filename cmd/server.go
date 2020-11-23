@@ -9,10 +9,10 @@ import (
 	grpc_zap "github.com/grpc-ecosystem/go-grpc-middleware/logging/zap"
 	grpc_ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	grpc_validator "github.com/grpc-ecosystem/go-grpc-middleware/validator"
+	"github.com/jacobweinstock/pbnj/cmd/zaplog"
+	"github.com/jacobweinstock/pbnj/server/grpcsvr"
 	"github.com/packethost/pkg/log/logr"
 	"github.com/spf13/cobra"
-	"github.com/tinkerbell/pbnj/cmd/zaplog"
-	"github.com/tinkerbell/pbnj/server/grpcsvr"
 	"goa.design/goa/grpc/middleware"
 	"google.golang.org/grpc"
 )
@@ -35,7 +35,7 @@ var (
 			defer cancel()
 
 			logger, zlog, err := logr.NewPacketLogr(
-				logr.WithServiceName("github.com/tinkerbell/pbnj"),
+				logr.WithServiceName("github.com/jacobweinstock/pbnj"),
 				logr.WithLogLevel(logLevel),
 			)
 			if err != nil {

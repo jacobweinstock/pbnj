@@ -8,9 +8,9 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/jacobweinstock/pbnj/evlog"
+	"github.com/jacobweinstock/pbnj/interfaces/power"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/evlog"
-	"github.com/tinkerbell/pbnj/interfaces/power"
 	"golang.org/x/crypto/ssh"
 )
 

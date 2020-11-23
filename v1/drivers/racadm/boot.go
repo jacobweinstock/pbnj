@@ -7,8 +7,8 @@ import (
 	"context"
 	"strings"
 
+	"github.com/jacobweinstock/pbnj/interfaces/boot"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/interfaces/boot"
 )
 
 func init() {

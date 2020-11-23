@@ -6,8 +6,8 @@ package ipmitool
 import (
 	"context"
 
+	"github.com/jacobweinstock/pbnj/interfaces/power"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/interfaces/power"
 )
 
 func init() {

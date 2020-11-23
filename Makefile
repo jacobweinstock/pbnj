@@ -1,4 +1,4 @@
-REPO:=github.com/tinkerbell/pbnj
+REPO:=github.com/jacobweinstock/pbnj
 REPO_BASE:=$(shell dirname ${REPO})
 PROTOS_LOC:=v2/protos
 BINARY:=pbnj

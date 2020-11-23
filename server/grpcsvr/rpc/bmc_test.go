@@ -5,10 +5,10 @@ import (
 	"testing"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/cmd/zaplog"
 	"github.com/onsi/gomega"
 	"github.com/packethost/pkg/log/logr"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/cmd/zaplog"
 )
 
 func TestConfigNetworkSource(t *testing.T) {

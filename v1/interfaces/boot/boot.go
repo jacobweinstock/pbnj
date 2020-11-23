@@ -6,8 +6,8 @@ package boot
 import (
 	"context"
 
+	"github.com/jacobweinstock/pbnj/log"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/log"
 )
 
 var (

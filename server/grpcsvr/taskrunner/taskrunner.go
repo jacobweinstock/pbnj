@@ -10,9 +10,9 @@ import (
 
 	"github.com/pkg/errors"
 
+	"github.com/jacobweinstock/pbnj/pkg/logging"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 	"github.com/rs/xid"
-	"github.com/tinkerbell/pbnj/pkg/logging"
-	"github.com/tinkerbell/pbnj/pkg/repository"
 )
 
 // Runner for executing a task

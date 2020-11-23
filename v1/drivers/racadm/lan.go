@@ -6,8 +6,8 @@ package racadm
 import (
 	"fmt"
 
+	"github.com/jacobweinstock/pbnj/interfaces/bmc"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/interfaces/bmc"
 )
 
 var lanIPSources = map[bmc.IPSource]string{

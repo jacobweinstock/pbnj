@@ -13,9 +13,9 @@ import (
 	"sync"
 
 	multierror "github.com/hashicorp/go-multierror"
+	"github.com/jacobweinstock/pbnj/evlog"
+	"github.com/jacobweinstock/pbnj/interfaces/power"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/evlog"
-	"github.com/tinkerbell/pbnj/interfaces/power"
 )
 
 var (

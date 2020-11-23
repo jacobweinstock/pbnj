@@ -11,11 +11,11 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
+	"github.com/jacobweinstock/pbnj/server/grpcsvr/oob"
+	bmc "github.com/jacobweinstock/pbnj/server/grpcsvr/oob"
 	"github.com/packethost/pkg/log/logr"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/repository"
-	"github.com/tinkerbell/pbnj/server/grpcsvr/oob"
-	bmc "github.com/tinkerbell/pbnj/server/grpcsvr/oob"
 	goipmi "github.com/vmware/goipmi"
 )
 

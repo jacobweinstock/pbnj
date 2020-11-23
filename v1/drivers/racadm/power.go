@@ -7,8 +7,8 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/jacobweinstock/pbnj/interfaces/power"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/interfaces/power"
 )
 
 var powerStatusRegexp = regexp.MustCompile(`(?m)^1\r?\n`)

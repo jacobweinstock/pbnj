@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/jacobweinstock/pbnj/reqid"
 	"github.com/pkg/errors"
-	"github.com/tinkerbell/pbnj/reqid"
 )
 
 // TaskTimeout is the default timeout for tasks

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	v1Client "github.com/jacobweinstock/pbnj/client"
 	"github.com/packethost/pkg/log/logr"
 	"github.com/spf13/cobra"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	v1Client "github.com/tinkerbell/pbnj/client"
 	"google.golang.org/grpc"
 )
 
@@ -24,7 +24,7 @@ var machineCmd = &cobra.Command{
 		defer cancel()
 
 		logger, zlog, err := logr.NewPacketLogr(
-			logr.WithServiceName("github.com/tinkerbell/pbnj"),
+			logr.WithServiceName("github.com/jacobweinstock/pbnj"),
 			logr.WithLogLevel(logLevel),
 		)
 		if err != nil {
