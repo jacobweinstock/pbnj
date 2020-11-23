@@ -3,10 +3,10 @@ package rpc
 import (
 	"context"
 
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/logging"
-	"github.com/tinkerbell/pbnj/pkg/task"
-	"github.com/tinkerbell/pbnj/server/grpcsvr/oob/machine"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/logging"
+	"github.com/jacobweinstock/pbnj/pkg/task"
+	"github.com/jacobweinstock/pbnj/server/grpcsvr/oob/machine"
 )
 
 // MachineService for doing power and device actions

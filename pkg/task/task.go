@@ -3,7 +3,7 @@ package task
 import (
 	"context"
 
-	"github.com/tinkerbell/pbnj/pkg/repository"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 )
 
 // Task interface for doing BMC actions

@@ -8,12 +8,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/tinkerbell/pbnj/api"
-	"github.com/tinkerbell/pbnj/drivers/ipmitool"
-	"github.com/tinkerbell/pbnj/drivers/racadm"
-	"github.com/tinkerbell/pbnj/interfaces/power"
-	"github.com/tinkerbell/pbnj/log"
-	"github.com/tinkerbell/pbnj/reqid"
+	"github.com/jacobweinstock/pbnj/api"
+	"github.com/jacobweinstock/pbnj/drivers/ipmitool"
+	"github.com/jacobweinstock/pbnj/drivers/racadm"
+	"github.com/jacobweinstock/pbnj/interfaces/power"
+	"github.com/jacobweinstock/pbnj/log"
+	"github.com/jacobweinstock/pbnj/reqid"
 )
 
 var (
@@ -41,7 +41,7 @@ func cleanup() {
 func main() {
 	flag.Parse()
 
-	logger, sync, err := log.Init("github.com/tinkerbell/pbnj")
+	logger, sync, err := log.Init("github.com/jacobweinstock/pbnj")
 	if err != nil {
 		panic(err)
 	}

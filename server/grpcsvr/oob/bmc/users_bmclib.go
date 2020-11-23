@@ -7,8 +7,8 @@ import (
 	"github.com/bmc-toolbox/bmclib/devices"
 	"github.com/bmc-toolbox/bmclib/discover"
 	"github.com/go-logr/logr"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/repository"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 )
 
 type bmclibUserManagement struct {

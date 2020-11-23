@@ -3,9 +3,9 @@ package rpc
 import (
 	"context"
 
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/logging"
-	"github.com/tinkerbell/pbnj/pkg/task"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/logging"
+	"github.com/jacobweinstock/pbnj/pkg/task"
 )
 
 // TaskService for retrieving task details

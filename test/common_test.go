@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinkerbell/pbnj/cmd"
+	"github.com/jacobweinstock/pbnj/cmd"
 	"gopkg.in/yaml.v2"
 )
 

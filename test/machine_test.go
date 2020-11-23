@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/google/go-cmp/cmp"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	v1Client "github.com/tinkerbell/pbnj/client"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	v1Client "github.com/jacobweinstock/pbnj/client"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/testing/protocmp"
 )

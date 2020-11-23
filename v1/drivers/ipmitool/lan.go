@@ -6,7 +6,7 @@ package ipmitool
 import (
 	"fmt"
 
-	"github.com/tinkerbell/pbnj/interfaces/bmc"
+	"github.com/jacobweinstock/pbnj/interfaces/bmc"
 )
 
 var lanIPSources = map[bmc.IPSource]string{

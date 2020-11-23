@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tinkerbell/pbnj/interfaces/boot"
+	"github.com/jacobweinstock/pbnj/interfaces/boot"
 )
 
 // updateBootOptions is the handler for the PATCH /boot endpoint.

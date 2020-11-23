@@ -5,10 +5,10 @@ import (
 	"fmt"
 
 	"github.com/go-logr/logr"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/oob"
-	"github.com/tinkerbell/pbnj/pkg/repository"
-	bmc "github.com/tinkerbell/pbnj/server/grpcsvr/oob"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/oob"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
+	bmc "github.com/jacobweinstock/pbnj/server/grpcsvr/oob"
 )
 
 // Action for making bmc actions on BMCs, implements oob.User interface

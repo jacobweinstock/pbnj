@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tinkerbell/pbnj/interfaces/power"
-	"github.com/tinkerbell/pbnj/reqid"
+	"github.com/jacobweinstock/pbnj/interfaces/power"
+	"github.com/jacobweinstock/pbnj/reqid"
 )
 
 // powerAction is the handler for the POST /power endpoint.

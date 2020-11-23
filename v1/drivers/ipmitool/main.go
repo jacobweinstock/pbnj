@@ -4,8 +4,8 @@
 package ipmitool
 
 import (
-	"github.com/tinkerbell/pbnj/evlog"
-	"github.com/tinkerbell/pbnj/log"
+	"github.com/jacobweinstock/pbnj/evlog"
+	"github.com/jacobweinstock/pbnj/log"
 )
 
 var (

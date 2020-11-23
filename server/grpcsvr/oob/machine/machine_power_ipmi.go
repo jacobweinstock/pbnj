@@ -6,8 +6,8 @@ import (
 	"github.com/gebn/bmc"
 	"github.com/gebn/bmc/pkg/ipmi"
 	"github.com/go-logr/logr"
-	v1 "github.com/tinkerbell/pbnj/api/v1"
-	"github.com/tinkerbell/pbnj/pkg/repository"
+	v1 "github.com/jacobweinstock/pbnj/api/v1"
+	"github.com/jacobweinstock/pbnj/pkg/repository"
 )
 
 type ipmiBMC struct {

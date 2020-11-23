@@ -8,7 +8,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tinkerbell/pbnj/util"
+	"github.com/jacobweinstock/pbnj/util"
 )
 
 // NewDriverFromGinContext creates a new Driver using info in the http request

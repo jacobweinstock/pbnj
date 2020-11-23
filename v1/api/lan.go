@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tinkerbell/pbnj/interfaces/bmc"
+	"github.com/jacobweinstock/pbnj/interfaces/bmc"
 )
 
 // updateLANConfig is the handler for the POST /ipmi-lan endpoint.

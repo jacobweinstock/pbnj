@@ -6,7 +6,7 @@ import (
 	"github.com/go-logr/logr"
 	"github.com/go-logr/zapr"
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
-	"github.com/tinkerbell/pbnj/pkg/logging"
+	"github.com/jacobweinstock/pbnj/pkg/logging"
 )
 
 // Logger is a wrapper around zap.SugaredLogger

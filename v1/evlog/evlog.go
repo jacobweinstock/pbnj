@@ -6,8 +6,8 @@ package evlog
 import (
 	"context"
 
-	"github.com/tinkerbell/pbnj/log"
-	"github.com/tinkerbell/pbnj/reqid"
+	"github.com/jacobweinstock/pbnj/log"
+	"github.com/jacobweinstock/pbnj/reqid"
 )
 
 // Log embeds a Logger
