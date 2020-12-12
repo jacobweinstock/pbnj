@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pbnj
+  labels:
+    k8s-app: pbnj
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: pbnj
+  template:
+    metadata:
+      annotations:
+        fluentd.packet.net/efk: stdout+stderr
+        fluentd.packet.net/efk-index: pbnj
+      labels:
+        k8s-app: pbnj
+    spec:
+      containers:
+        - name: pbnj
+          image: "{{ .Values.pbnj.image.repository }}:{{ .Values.pbnj.image.tag }}"
+          imagePullPolicy: {{ .Values.pbnj.image.pullPolicy }}
+          env:
+          - name: ACCESS_ID
+            valueFrom:
+              secretKeyRef:
+                name: pbnj-auth
+                key: access-id
+          - name: ACCESS_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: pbnj-auth
+                key: access-secret
+          - name: PBNJ_ENABLEHTTP
+            value: "true"
+          - name: GIN_MODE
+            value: release
+          - name: PBNJ_PORT
+            value: "50051"
+          - name: PACKET_ENV
+            value: {{ .Values.env }}
+          envFrom:
+          - secretRef:
+              name: pbnj-env
+          ports:
+            - name: http
+              containerPort: 9090
+              protocol: TCP
+            - name: http2
+              containerPort: 50051
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command: ["/tmp/grpc_health_probe", "-addr=:50051"]
+          readinessProbe:
+            exec:
+              command: ["/tmp/grpc_health_probe", "-addr=:50051"]
+          {{ if .Values.localDev.Enabled }}
+          {{ else }}
+          resources:
+            limits:
+              cpu: 2
+              memory: 2Gi
+            requests:
+              cpu: 2
+              memory: 2Gi
+          {{ end }}

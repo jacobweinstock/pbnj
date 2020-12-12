@@ -19,6 +19,7 @@ import (
 	"github.com/tinkerbell/pbnj/server/grpcsvr/taskrunner"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health/grpc_health_v1"
+	"google.golang.org/grpc/reflection"
 )
 
 // Server options
@@ -83,7 +84,7 @@ func RunServer(ctx context.Context, log logging.Logger, grpcServer *grpc.Server,
 
 	hc := healthcheck.NewHealthChecker()
 	grpc_health_v1.RegisterHealthServer(grpcServer, hc)
-
+	reflection.Register(grpcServer)
 	listen, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		return err

@@ -1,0 +1,18 @@
+clusterFQDN: ''
+clusterShortName: ''
+env: ''
+location: ''
+packetAPI: ''
+kubeApiEndpoint: ''
+
+pbnj:
+  image:
+    repository: quay.io/tinkerbell/pbnj
+    tag: "34-edc2882529e563e2067c0d33ae7e912ab4fb9547"
+    pullPolicy: IfNotPresent
+  env:
+    IPMITOOL_DEFAULT_CIPHER: 3
+    LOGENTRIES_TOKEN: changeme
+
+localDev:
+  Enabled: true 
