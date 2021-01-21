@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	cmd "github.com/tinkerbell/pbnj/cmd/pbnj"
+	"github.com/tinkerbell/pbnj/cmd"
 	"gopkg.in/yaml.v2"
 )
 
@@ -65,12 +65,14 @@ type Resource struct {
 func TestMain(m *testing.M) {
 	// get the resources data
 	cfgData.Config(*cfg)
-
 	if cfgData.Server.Port == defaultPort {
 		// start the local internal server
 		go func() {
+			logFile := "./pbnj.log"
+			// remove existing log file
+			os.Remove(logFile)
 			serverCmd := cmd.NewRootCmd()
-			serverCmd.SetArgs([]string{"server", "--port", defaultPort})
+			serverCmd.SetArgs([]string{"server", "--port", defaultPort, "--logToFile", logFile})
 			serverCmd.Execute() // nolint
 		}()
 	}

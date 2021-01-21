@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"context"
@@ -37,6 +37,7 @@ var (
 	enableAuthz bool
 	hsKey       string
 	rsPubKey    string
+	logToFile   string
 	// serverCmd represents the server command
 	serverCmd = &cobra.Command{
 		Use:   "server",
@@ -47,9 +48,16 @@ var (
 			ctx, cancel := context.WithCancel(ctx)
 			defer cancel()
 
+			var logs []string
+			if logToFile != "" {
+				logs = []string{logToFile}
+			} else {
+				logs = []string{"stdout"}
+			}
 			logger, zlog, err := logr.NewPacketLogr(
 				logr.WithServiceName("github.com/tinkerbell/pbnj"),
 				logr.WithLogLevel(logLevel),
+				logr.WithOutputPaths(logs),
 			)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "%v\n", err)
@@ -106,6 +114,7 @@ func init() {
 	serverCmd.PersistentFlags().BoolVar(&enableAuthz, "enableAuthz", false, "enable Authz middleware. Configure with configuration file details")
 	serverCmd.PersistentFlags().StringVar(&hsKey, "hsKey", "", "HS key")
 	serverCmd.PersistentFlags().StringVar(&rsPubKey, "rsPubKey", "", "RS public key")
+	serverCmd.PersistentFlags().StringVar(&logToFile, "logToFile", "", "logs to file")
 	rootCmd.AddCommand(serverCmd)
 }
 

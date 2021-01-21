@@ -17,6 +17,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.2
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/hashicorp/go-multierror v1.1.0
+	github.com/manifoldco/promptui v0.8.0
 	github.com/mwitkow/go-proto-validators v0.3.2
 	github.com/onsi/gomega v1.10.2
 	github.com/packethost/pkg v0.0.0-20201221225314-ce5e5387b334

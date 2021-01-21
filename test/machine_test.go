@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"sort"
+	"strings"
 	"testing"
 	"time"
 
@@ -14,20 +15,21 @@ import (
 	v1Client "github.com/tinkerbell/pbnj/client"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/testing/protocmp"
+	"github.com/manifoldco/promptui"
 )
 
 var (
-	PowerRequest_ON      = v1.PowerRequest_ON
-	PowerRequest_OFF     = v1.PowerRequest_OFF
-	PowerRequest_STATUS  = v1.PowerRequest_STATUS
-	PowerRequest_CYCLE   = v1.PowerRequest_CYCLE
-	PowerRequest_RESET   = v1.PowerRequest_RESET
-	PowerRequest_HARDOFF = v1.PowerRequest_HARDOFF
-	DeviceRequest_NONE   = v1.DeviceRequest_NONE
-	DeviceRequest_BIOS   = v1.DeviceRequest_BIOS
-	DeviceRequest_DISK   = v1.DeviceRequest_DISK
-	DeviceRequest_CDROM  = v1.DeviceRequest_CDROM
-	DeviceRequest_PXE    = v1.DeviceRequest_PXE
+	PowerRequest_ON      = v1.PowerAction_POWER_ACTION_ON
+	PowerRequest_OFF     = v1.PowerAction_POWER_ACTION_OFF
+	PowerRequest_STATUS  = v1.PowerAction_POWER_ACTION_STATUS
+	PowerRequest_CYCLE   = v1.PowerAction_POWER_ACTION_CYCLE
+	PowerRequest_RESET   = v1.PowerAction_POWER_ACTION_RESET
+	PowerRequest_HARDOFF = v1.PowerAction_POWER_ACTION_HARDOFF
+	DeviceRequest_NONE   = v1.BootDevice_BOOT_DEVICE_NONE
+	DeviceRequest_BIOS   = v1.BootDevice_BOOT_DEVICE_BIOS
+	DeviceRequest_DISK   = v1.BootDevice_BOOT_DEVICE_DISK
+	DeviceRequest_CDROM  = v1.BootDevice_BOOT_DEVICE_CDROM
+	DeviceRequest_PXE    = v1.BootDevice_BOOT_DEVICE_PXE
 	lookup               = map[string]map[string]expected{
 		"happyTests":           happyTests,
 		"notIdentifiableTests": notIdentifiableTests,
@@ -59,28 +61,28 @@ var (
 			},
 		},*/
 		"3 power on": {
-			ActionPower: &PowerRequest_ON,
+			ActionPower: PowerRequest_ON,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
-				Description: "power action: ON",
+				Description: "power action: POWER_ACTION_ON",
 				Error:       &v1.Error{},
 				State:       "complete",
 				Result:      "on",
 				Complete:    true,
-				Messages:    []string{"working on power ON", "connecting to BMC", "connected to BMC", "power ON complete"},
+				Messages:    []string{"working on power POWER_ACTION_ON", "connected to BMC", "power POWER_ACTION_ON complete"},
 			},
-			WaitTime: 180 * time.Second,
+			WaitTime: 1 * time.Second,
 		},
 		"4 power status": {
-			ActionPower: &PowerRequest_STATUS,
+			ActionPower: PowerRequest_STATUS,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
-				Description: "power action: STATUS",
+				Description: "power action: POWER_ACTION_STATUS",
 				Error:       &v1.Error{},
 				State:       "complete",
 				Result:      "on",
 				Complete:    true,
-				Messages:    []string{"working on power STATUS", "connecting to BMC", "connected to BMC", "power STATUS complete"},
+				Messages:    []string{"working on power POWER_ACTION_STATUS", "connected to BMC", "power POWER_ACTION_STATUS complete"},
 			},
 			WaitTime: 1 * time.Second,
 		},
@@ -115,7 +117,7 @@ var (
 	}
 	deviceHappyTests = map[string]expected{
 		"1 set device pxe": {
-			ActionBootDev: &DeviceRequest_PXE,
+			ActionBootDev: DeviceRequest_PXE,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
 				Description: "power action: OFF",
@@ -128,7 +130,7 @@ var (
 			WaitTime: 1 * time.Second,
 		},
 		"2 power status": {
-			ActionPower: &PowerRequest_STATUS,
+			ActionPower: PowerRequest_STATUS,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
 				Description: "power action: STATUS",
@@ -140,7 +142,7 @@ var (
 			},
 		},
 		"3 power on": {
-			ActionPower: &PowerRequest_ON,
+			ActionPower: PowerRequest_ON,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
 				Description: "power action: ON",
@@ -153,7 +155,7 @@ var (
 			WaitTime: 180 * time.Second,
 		},
 		"4 power status": {
-			ActionPower: &PowerRequest_STATUS,
+			ActionPower: PowerRequest_STATUS,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
 				Description: "power action: STATUS",
@@ -165,7 +167,7 @@ var (
 			},
 		},
 		"5 power cycle": {
-			ActionPower: &PowerRequest_CYCLE,
+			ActionPower: PowerRequest_CYCLE,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
 				Description: "power action: CYCLE",
@@ -178,7 +180,7 @@ var (
 			WaitTime: 60 * time.Second,
 		},
 		"6 power status": {
-			ActionPower: &PowerRequest_STATUS,
+			ActionPower: PowerRequest_STATUS,
 			Want: &v1.StatusResponse{
 				Id:          "12345",
 				Description: "power action: STATUS",
@@ -191,12 +193,12 @@ var (
 		},
 	}
 	notIdentifiableTests = map[string]expected{
-		"power status":  {ActionPower: &PowerRequest_STATUS, Want: notIdentifiableWant},
-		"power on":      {ActionPower: &PowerRequest_ON, Want: notIdentifiableWant},
-		"power off":     {ActionPower: &PowerRequest_OFF, Want: notIdentifiableWant},
-		"power hardoff": {ActionPower: &PowerRequest_HARDOFF, Want: notIdentifiableWant},
-		"power cycle":   {ActionPower: &PowerRequest_CYCLE, Want: notIdentifiableWant},
-		"power reset":   {ActionPower: &PowerRequest_RESET, Want: notIdentifiableWant},
+		"power status":  {ActionPower: PowerRequest_STATUS, Want: notIdentifiableWant},
+		"power on":      {ActionPower: PowerRequest_ON, Want: notIdentifiableWant},
+		"power off":     {ActionPower: PowerRequest_OFF, Want: notIdentifiableWant},
+		"power hardoff": {ActionPower: PowerRequest_HARDOFF, Want: notIdentifiableWant},
+		"power cycle":   {ActionPower: PowerRequest_CYCLE, Want: notIdentifiableWant},
+		"power reset":   {ActionPower: PowerRequest_RESET, Want: notIdentifiableWant},
 	}
 	notIdentifiableWant = &v1.StatusResponse{
 		Id:          "12345",
@@ -214,14 +216,10 @@ var (
 )
 
 type expected struct {
-	ActionPower   *v1.PowerRequest_Action
-	ActionBootDev *v1.DeviceRequest_Device
+	ActionPower   v1.PowerAction
+	ActionBootDev v1.BootDevice
 	Want          *v1.StatusResponse
 	WaitTime      time.Duration
-}
-type machineActions struct {
-	Device v1.DeviceRequest_Device
-	Power  v1.PowerRequest_Action
 }
 
 type testResource struct {
@@ -244,45 +242,70 @@ func TestPower(t *testing.T) {
 			t.Parallel()
 			tests := rs.Tests
 			testsKeys := sortedResources(tests)
-			for _, key := range testsKeys {
+			for index, key := range testsKeys {
 				key := key
 				var failed bool
 				tc := tests[key]
 				name := key
 				t.Run(name, func(t *testing.T) {
 					// do the work
-					var got *v1.StatusResponse
-					var err error
-					if tc.ActionPower != nil {
-						got, err = runMachinePowerClient(rs, *tc.ActionPower, cfgData.Server)
-						if err != nil {
-							t.Fatal(err)
+
+					whatAmI := func(i interface{}) (*v1.StatusResponse, error) {
+						var got *v1.StatusResponse
+						var err error
+						switch i.(type) {
+						case v1.PowerAction:
+							got, err = runMachinePowerClient(rs, tc.ActionPower, cfgData.Server)
+							if err != nil {
+								return nil, err
+							}
+						case v1.BootDevice:
+							got, err = runMachineBootDevClient(rs, tc.ActionBootDev, cfgData.Server)
+							if err != nil {
+								return nil, err
+							}
 						}
-					} else {
-						got, err = runMachineBootDevClient(rs, *tc.ActionBootDev, cfgData.Server)
-						if err != nil {
-							t.Fatal(err)
-						}
+						return got, nil
+					}
+
+					got, err := whatAmI(tc.ActionPower)
+					if err != nil {
+						failed = true
+						t.Fatal(err)
 					}
 
 					got.Id = "12345"
+					got.Result = strings.ToLower(got.Result)
 					diff := cmp.Diff(tc.Want, got, protocmp.Transform())
 					if diff != "" {
 						failed = true
 						t.Fatalf(diff)
 					}
 				})
+				// user input whether to do next step or stop
+				nextStep := tests[testsKeys[index+1]]
+				t.Log(nextStep)
+				prompt := promptui.Select{
+					Label: fmt.Sprintf("next step: %v, Continue?", nextStep.Want.Description),
+					Items: []string{"Yes", "No"},
+				}
+
+				_, _, err := prompt.Run()
+				if err != nil {
+					fmt.Printf("Prompt failed %v\n", err)
+					return
+				}
 				if !failed {
 					time.Sleep(tc.WaitTime)
-				} else {
+				} /*else {
 					break
-				}
+				}*/
 			}
 		})
 	}
 }
 
-func runMachinePowerClient(in testResource, action v1.PowerRequest_Action, s Server) (*v1.StatusResponse, error) {
+func runMachinePowerClient(in testResource, action v1.PowerAction, s Server) (*v1.StatusResponse, error) {
 	var opts []grpc.DialOption
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
@@ -312,7 +335,7 @@ func runMachinePowerClient(in testResource, action v1.PowerRequest_Action, s Ser
 		Vendor: &v1.Vendor{
 			Name: in.Vendor,
 		},
-		Action: action,
+		PowerAction: action,
 	})
 	if err != nil {
 		return nil, err
@@ -321,7 +344,7 @@ func runMachinePowerClient(in testResource, action v1.PowerRequest_Action, s Ser
 	return resp, nil
 }
 
-func runMachineBootDevClient(in testResource, action v1.DeviceRequest_Device, s Server) (*v1.StatusResponse, error) {
+func runMachineBootDevClient(in testResource, action v1.BootDevice, s Server) (*v1.StatusResponse, error) {
 	var opts []grpc.DialOption
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
@@ -351,7 +374,7 @@ func runMachineBootDevClient(in testResource, action v1.DeviceRequest_Device, s 
 		Vendor: &v1.Vendor{
 			Name: in.Vendor,
 		},
-		Device: action,
+		BootDevice: action,
 	})
 	if err != nil {
 		return nil, err

@@ -31,6 +31,12 @@ func (b *bmclibUserManagement) Connect(ctx context.Context) error {
 	switch conn := connection.(type) {
 	case devices.Bmc:
 		b.conn = conn
+		err = b.conn.CheckCredentials()
+		if err != nil {
+			errMsg.Code = v1.Code_value["UNAVAILABLE"]
+			errMsg.Message = "Unable to connect"
+			return &errMsg
+		}
 	default:
 		errMsg.Code = v1.Code_value["UNKNOWN"]
 		errMsg.Message = "Unknown device"
